@@ -29,6 +29,17 @@ public class Product {
     @Column(name = "qty")
     private Integer Qty;
 
+    public Product() {
+    }
+
+    public Product(String name, String description, Integer unitPrice, Integer active, Integer qty) {
+        Name = name;
+        Description = description;
+        UnitPrice = unitPrice;
+        Active = active;
+        Qty = qty;
+    }
+
 
     public Integer getId() {
         return Id;
