@@ -2,10 +2,14 @@ package com.products.webapi.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.products.webapi.entity.Product;
+import com.products.webapi.exceptionHandler.ResourceNotFoundException;
 import com.products.webapi.service.ProductService;
 import org.apache.tomcat.util.http.parser.MediaType;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -45,4 +49,6 @@ public class ProductController {
     public ResponseEntity<?> deleteProduct(@PathVariable Integer id){
         return productService.deleteProduct(id);
     }
+
+
 }

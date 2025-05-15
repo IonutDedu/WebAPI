@@ -1,8 +1,11 @@
 package com.products.webapi.service;
 
 import com.products.webapi.entity.Product;
+import com.products.webapi.exceptionHandler.ApiException;
 import com.products.webapi.exceptionHandler.ResourceNotFoundException;
 import com.products.webapi.repository.ProductRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
