@@ -13,13 +13,8 @@ import java.math.BigDecimal;
 //@Data - not working
 //@Setter - not working
 //@Getter  - not working
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Integer Id;
-    @Column(name = "name")
-    private String Name;
+public final class Product extends Item{
+
     @Column(name = "description")
     private String Description;
     @Column(name = "unit_price")
@@ -33,28 +28,19 @@ public class Product {
     }
 
     public Product(String name, String description, Integer unitPrice, Integer active, Integer qty) {
-        Name = name;
+        super.setName(name);
         Description = description;
         UnitPrice = unitPrice;
         Active = active;
         Qty = qty;
     }
 
-
     public Integer getId() {
-        return Id;
-    }
-
-    public void setId(Integer id) {
-        Id = id;
+        return super.getId();
     }
 
     public String getName() {
-        return Name;
-    }
-
-    public void setName(String name) {
-        Name = name;
+        return super.getName();
     }
 
     public String getDescription() {

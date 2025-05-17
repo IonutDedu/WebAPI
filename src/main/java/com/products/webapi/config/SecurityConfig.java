@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,12 +20,16 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http.authorizeHttpRequests((requests) -> requests
-                    .requestMatchers("/api/products").hasAnyRole("USER","ADMIN")
-                    .requestMatchers("/api/**").hasRole("ADMIN")
-                    .anyRequest().authenticated())
+                    .requestMatchers("/api/**").hasAnyRole("ADMIN")
+                    .requestMatchers("/api/products").hasAnyRole("USER")
+                    .requestMatchers("/api/product/**").hasAnyRole("USER")
+                    .anyRequest().authenticated()
+                )
                 .formLogin(withDefaults())
                 .httpBasic(withDefaults());
+        http.csrf(AbstractHttpConfigurer::disable);
         return http.build();
     }
 
@@ -36,7 +41,7 @@ public class SecurityConfig {
                 .build();
         UserDetails admin = User.builder().username("admin")
                 .password(passwordEncoder().encode("admin"))
-                .roles("USER", "ADMIN")
+                .roles("ADMIN")
                 .build();
         return new InMemoryUserDetailsManager(user, admin);
     }

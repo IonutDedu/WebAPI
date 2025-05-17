@@ -35,17 +35,17 @@ public class ProductController {
 
     }
 
-    @PostMapping(value = "api/add-product", produces = "application/json")
+    @RequestMapping(value = "api/add-product",method = RequestMethod.POST, produces = "application/json")
     public Product addProduct(@RequestBody Product product){
         return productService.saveProduct(product);
     }
 
-    @PutMapping(value = "api/update-product/{id}", produces = "application/json")
+    @RequestMapping(value = "api/update-product/{id}",method = RequestMethod.PUT, produces = "application/json")
     public Product updateProduct(@PathVariable Integer id, @RequestBody Product product){
         return productService.updateProduct(id, product);
     }
 
-    @DeleteMapping(value = "api/delete-product/{id}", produces = "application/json")
+    @RequestMapping(value = "api/delete-product/{id}",method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<?> deleteProduct(@PathVariable Integer id){
         return productService.deleteProduct(id);
     }
